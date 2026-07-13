@@ -1,0 +1,43 @@
+---
+version: '3'
+
+tasks:
+  default:
+    desc: Build, vet, and test
+    cmds:
+      - task: fmt
+      - task: vet
+      - task: test
+      - task: build
+
+  build:
+    desc: Build the benchctl binary into bin/
+    cmds:
+      - go build -o bin/benchctl .
+
+  test:
+    desc: Run all tests
+    cmds:
+      - go test ./...
+
+  vet:
+    desc: Run go vet
+    cmds:
+      - go vet ./...
+
+  fmt:
+    desc: Format all Go files in place
+    cmds:
+      - gofmt -w .
+
+  lint:
+    desc: Fail if any Go file is unformatted, then vet
+    cmds:
+      - |
+        unformatted="$(gofmt -l .)"
+        if [ -n "$unformatted" ]; then
+          echo "gofmt needs to run on:"
+          echo "$unformatted"
+          exit 1
+        fi
+      - go vet ./...

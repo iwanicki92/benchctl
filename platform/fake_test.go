@@ -1,0 +1,44 @@
+package platform
+
+import (
+	"io"
+	"strings"
+)
+
+// fakeRunner is a test Runner. handler decides each call's output; calls
+// records every argv passed to Run.
+type fakeRunner struct {
+	handler     func(call int, argv []string) (string, error)
+	calls       [][]string
+	interactive [][]string
+	pushed      bool
+	streamOut   string // canned stdout for Stream
+	streamErr   error  // result of the Stream wait function
+	host        string // reported by Host()
+}
+
+func (fake *fakeRunner) Host() string { return fake.host }
+
+func (fake *fakeRunner) Run(argv ...string) (string, error) {
+	callIndex := len(fake.calls)
+	fake.calls = append(fake.calls, argv)
+	if fake.handler != nil {
+		return fake.handler(callIndex, argv)
+	}
+	return "", nil
+}
+
+func (fake *fakeRunner) RunInteractive(argv ...string) error {
+	fake.interactive = append(fake.interactive, argv)
+	return nil
+}
+
+func (fake *fakeRunner) Stream(argv ...string) (io.ReadCloser, func() error, error) {
+	fake.calls = append(fake.calls, argv)
+	return io.NopCloser(strings.NewReader(fake.streamOut)), func() error { return fake.streamErr }, nil
+}
+
+func (fake *fakeRunner) Push(localPath, remotePath string) (string, func() error, error) {
+	fake.pushed = true
+	return remotePath, func() error { return nil }, nil
+}

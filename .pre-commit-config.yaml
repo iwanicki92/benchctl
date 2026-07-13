@@ -1,0 +1,79 @@
+---
+default_stages: [pre-commit]
+
+default_install_hook_types: [pre-commit, commit-msg]
+
+ci:
+  autoupdate_commit_msg: 'pre-commit: autoupdate hooks'
+  autofix_prs: false
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: mixed-line-ending
+
+  - repo: https://github.com/talos-systems/conform
+    rev: v0.1.0-alpha.31
+    hooks:
+      - id: conform
+        stages:
+          - commit-msg
+
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.4.2
+    hooks:
+      - id: codespell
+
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.38.0
+    hooks:
+      - id: yamllint
+        args: [-c=.yamllint]
+
+  - repo: https://github.com/3mdeb/hooks
+    rev: v0.2.2
+    hooks:
+      - id: namespell
+        args: [--fix]
+      - id: replace-hyphen-like
+
+  # Format markdown with the gfm + frontmatter plugins, wrapped at 80.
+  - repo: https://github.com/hukkin/mdformat
+    rev: 1.0.0
+    hooks:
+      - id: mdformat
+        args: [--wrap, '80']
+        additional_dependencies:
+          - mdformat-gfm
+          - mdformat-frontmatter
+
+  # Go tooling runs as local hooks against the system toolchain, matching the
+  # Taskfile gates. gofmt and go vet need no network; go test runs the suite.
+  - repo: local
+    hooks:
+      - id: gofmt
+        name: gofmt
+        entry: gofmt -l -w
+        language: system
+        types: [go]
+      - id: go-vet
+        name: go vet
+        entry: go vet ./...
+        language: system
+        types: [go]
+        pass_filenames: false
+        require_serial: true
+      - id: go-test
+        name: go test
+        entry: go test ./...
+        language: system
+        types: [go]
+        pass_filenames: false
+        require_serial: true
