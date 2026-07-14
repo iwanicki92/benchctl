@@ -93,7 +93,7 @@ that imports this one and builds its own `main`.
 ## Dependencies
 
 - On the PC: `ssh`, `scp`, `sshpass`.
-- On a BenchRack RTE: `flashrom`, `picocom`, and the RteCtrl REST API (port
+- On a BenchRack RTE: `flashrom`, `telnet`, and the RteCtrl REST API (port
   8000).
 
 ## Development
