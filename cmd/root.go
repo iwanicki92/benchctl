@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2026 3mdeb <contact@3mdeb.com>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 // Package cmd defines the benchctl command-line interface. Commands resolve a
 // platform driver and call its interface methods; they hold no platform logic.
 package cmd

@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2026 3mdeb <contact@3mdeb.com>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 package cmd
 
 import (

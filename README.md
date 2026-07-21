@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2026 3mdeb <contact@3mdeb.com>
+
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # benchctl
 
 `benchctl` controls test benches from a workstation or from the bench itself.

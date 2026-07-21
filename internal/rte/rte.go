@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2026 3mdeb <contact@3mdeb.com>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 // Package rte is a client for the RTE controller's REST API, which exposes the
 // bench's GPIO pins by logical id at http://<host>:8000/api/v1/gpio/{id}.
 //

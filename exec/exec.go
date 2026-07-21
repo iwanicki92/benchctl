@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2026 3mdeb <contact@3mdeb.com>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 // Package exec runs bench commands, either locally (when the bench is the local
 // host) or over SSH from a workstation. It also copies firmware to the bench for
 // remote flashing.

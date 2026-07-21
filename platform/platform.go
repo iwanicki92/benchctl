@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2026 3mdeb <contact@3mdeb.com>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 // Package platform defines the bench-control interface that benchctl commands
 // call, plus a registry of platform drivers. A new platform is added as one
 // file that implements Platform and registers a Spec in its init().
