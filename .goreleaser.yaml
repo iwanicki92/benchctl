@@ -27,8 +27,8 @@ builds:
     ldflags:
       - -s -w -X github.com/zarhus/benchctl/cmd.tag={{ .Tag }} -X github.com/zarhus/benchctl/cmd.revision={{ .Commit }}
 
-gomod:
-  proxy: true
+# gomod:
+  # proxy: true
 
 archives:
   - formats: [tar.gz]
