@@ -29,8 +29,19 @@ archives:
     name_template: >-
       {{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}
     files:
-      - LICENSES/*
-      - README.md
+      - src: LICENSES/*
+        info:
+          owner: root
+          group: root
+          mtime: "{{ .CommitDate }}"
+      - src: README.md
+        info:
+          owner: root
+          group: root
+          mtime: "{{ .CommitDate }}"
+    builds_info:
+      group: root
+      owner: root
 
 changelog:
   sort: asc
@@ -62,6 +73,9 @@ nfpms:
         dependencies:
           - openssh-clients
           - sshpass
+
+    rpm:
+      buildhost: builder
 
 release:
   footer: >-
