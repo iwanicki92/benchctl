@@ -1,5 +1,11 @@
+# SPDX-FileCopyrightText: 2026 Michał Iwanicki <iwanicki92@gmail.com>
+#
+# SPDX-License-Identifier: Apache-2.0
+
 # yaml-language-server: $schema=https://goreleaser.com/static/schema.json
 # vim: set ts=2 sw=2 tw=0 fo=cnqoj
+
+---
 
 version: 2
 
